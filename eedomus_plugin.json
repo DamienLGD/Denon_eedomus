@@ -1,0 +1,115 @@
+{
+	"plugin_id":"denon",
+	"name_fr": "Denon",
+	"icon":"ampli.png",
+	"version":"1.02",
+	"creation_date":"2017-12-17",
+	"modification_date":"2017-12-17",
+	"author":"<a href='https://github.com/DamienLGD/Denon_eedomus' target='_blank'>Xianghua<img src='/img/external.png'></a>",
+	"description_fr":"plugin compatible avec les séries AVR-X de <a href='https://www.denon.fr/fr/product/homecinema/avreceiver' target='_blank'>Denon</a>",
+	"description_en":"works only with <a href='https://usa.denon.com/us/product/hometheater/receivers' target='_blank'>Denon</a> AVR-X",
+	"description_es": "",
+	"description_it": "",
+	"description_de": "",
+	"forum_link": "http://forum.eedomus.com/viewtopic.php?f=15&t=5747",
+"parameters":
+[
+	{
+		"parameter": "IP", 
+		"description": "Adresse IP",
+		"xtype": "textfield",
+		"default_value": "",
+		"field": "width:130, allowBlank:false, maskRe:/[0-9.]/, regex:/^(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9])\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[1-9]|0)\\.(25[0-5]|2[0-4][0-9]|[0-1]{1}[0-9]{2}|[1-9]{1}[0-9]{1}|[0-9])$/,  regexText:'Adresse IP invalide [0-255].[0-255].[0-255].[0-255]'"
+	}
+],
+"devices":
+	[{
+	"device_id":"denonpower",
+	"module_id":"41",
+	"type":"http",
+	"name_fr":"Denon Power",
+	"name_en":"Denon Power",
+	"icon":"remote.png",
+	"utilisation_id":"43", 
+	"parameters":{
+		"VAR1": "plugin.parameters.IP",
+		"value_type":"list",
+		"ignore_errors":3,
+		"RAW_URL":"http://[VAR1]/goform/formMainZone_MainZoneXml.xml",
+		"RAW_XPATH":"/item/Power",
+		"POLLING":"1",
+		"convert": 0
+	},
+	"values":
+	[
+		{ "value": "On", "description": "On", "icon": "default_on.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_OnOff%2FON" },
+		{ "value": "STANDBY", "description": "Off", "icon": "default_off.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_OnOff%2FOFF" }
+	]
+	},
+	{
+	"device_id":"denonvolume",
+	"parent_id": "denonpower",
+	"module_id":"41",
+	"type":"http",
+	"name_fr":"Denon Volume",
+	"name_en":"Denon Volume",
+	"icon":"volume.png",
+	"utilisation_id":"43", 
+	"parameters":{
+		"VAR1": "plugin.parameters.IP",
+		"value_type":"list",
+		"ignore_errors":3,
+		"RAW_URL":"",
+		"RAW_XPATH":"",
+		"POLLING":"1",
+		"convert": 0
+	},
+	"values":
+	[
+		{ "value": 0, "description": "Mute", "icon": "forbidden.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutVolumeMute/on" },
+		{ "value": 1, "description": "Unmute", "icon": "play.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutVolumeMute/off" },
+		{ "value": 2, "description": "Plus", "icon": "plus.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutMasterVolumeBtn/>" },
+		{ "value": 3, "description": "Moins", "icon": "minus.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutMasterVolumeBtn/<" },
+		{ "value": 4, "description": "Sleep 30 mn", "icon": "timewakeup.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "PutSleepTimer/030" },
+		{ "value": 10, "description": "10", "icon": "volume.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutMasterVolumeSet/-70.0" },
+		{ "value": 20, "description": "20", "icon": "volume.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutMasterVolumeSet/-60.0" },
+		{ "value": 30, "description": "30", "icon": "volume.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutMasterVolumeSet/-50.0" },
+		{ "value": 40, "description": "40", "icon": "volume.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutMasterVolumeSet/-40.0" },
+		{ "value": 50, "description": "50", "icon": "volume.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutMasterVolumeSet/-30.0" },
+		{ "value": 60, "description": "60", "icon": "volume.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutMasterVolumeSet/-20.0" },
+		{ "value": 70, "description": "70", "icon": "volume.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutMasterVolumeSet/-10.0" }			
+	]
+	},
+	{
+	"device_id":"denonmode",
+	"parent_id": "denonpower",
+	"module_id":"41",
+	"type":"http",
+	"name_fr":"Denon Mode",
+	"name_en":"Denon Mode",
+	"icon":"music.png",
+	"utilisation_id":"43", 
+	"parameters":{
+		"VAR1": "plugin.parameters.IP",
+		"value_type":"list",
+		"ignore_errors":3,
+		"RAW_URL":"http://[VAR1]/goform/formMainZone_MainZoneXml.xml",
+		"RAW_XPATH":"/item/InputFuncSelect",
+		"POLLING":"1",
+		"convert": 0
+	},
+	"values":
+	[
+		{ "value": "TV Audio", "description": "TV Audio", "icon": "music.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_InputFunction%2FTV" },
+		{ "value": "Bluetooth", "description": "Bluetooth", "icon": "music.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_InputFunction%2FBT" },
+		{ "value": "Online Music", "description": "Internet Radio", "icon": "music.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_InputFunction%2FIRP" },
+		{ "value": "DVD/Blu-ray", "description": "DVD/Blu-ray", "icon": "music.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_InputFunction%2FDVD" },
+		{ "value": "CBL/SAT", "description": "CBL/SAT", "icon": "music.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_InputFunction%2FSAT%2FCBL" },
+		{ "value": "Game", "description": "Game", "icon": "music.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_InputFunction%2FGAME" },
+		{ "value": "Media Player", "description": "Media Player", "icon": "music.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_InputFunction%2FMPLAY" },
+		{ "value": "Tuner", "description": "Tuner", "icon": "music.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_InputFunction%2FTUNER" },
+		{ "value": "AUX", "description": "AUX", "icon": "music.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_InputFunction%2FAUX1" },
+		{ "value": "Blu-ray", "description": "Blu-ray", "icon": "music.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_InputFunction%2FAUX1" }
+	]
+	}]
+}
