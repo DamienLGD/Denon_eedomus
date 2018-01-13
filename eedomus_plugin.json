@@ -2,7 +2,7 @@
 	"plugin_id":"denon",
 	"name_fr": "Denon",
 	"icon":"ampli.png",
-	"version":"1.02",
+	"version":"1.03",
 	"creation_date":"2017-12-17",
 	"modification_date":"2017-12-17",
 	"author":"<a href='https://github.com/DamienLGD/Denon_eedomus' target='_blank'>Xianghua<img src='/img/external.png'></a>",
@@ -42,7 +42,7 @@
 	},
 	"values":
 	[
-		{ "value": "On", "description": "On", "icon": "default_on.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_OnOff%2FON" },
+		{ "value": "ON", "description": "On", "icon": "default_on.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_OnOff%2FON" },
 		{ "value": "STANDBY", "description": "Off", "icon": "default_off.png", "http_url": "http://[VAR1]/MainZone/index.put.asp?", "http_type": "GET",  "http_params": "cmd0=PutZone_OnOff%2FOFF" }
 	]
 	},
